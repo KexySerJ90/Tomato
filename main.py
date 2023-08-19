@@ -1,4 +1,4 @@
-from tkinter import *
+from tkinter import Tk, Canvas, Label, Button, PhotoImage
 
 # ---------------------------- CONSTANTS ------------------------------- #
 PINK = "#e2979c"
@@ -6,7 +6,7 @@ RED = "#e7305b"
 GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
 FONT_NAME = "Courier"
-WORK_MIN = 1
+WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
 reps=0
@@ -15,7 +15,9 @@ timer=None
 
 # ---------------------------- TIMER RESET ------------------------------- #
 def reset_timer():
+    global reps
     window.after_cancel(timer)
+    reps = 0
     canvas.itemconfig(timer_canvas,text='00:00')
     Title_label.config(text='Timer')
     check.config(text='')
@@ -37,7 +39,7 @@ def countdown(count):
     count_min=count//60
     count_sec=count%60
     #itemconfig - это метод объекта Canvas в библиотеке tkinter, который позволяет изменять настройки элементов, созданных на холсте. В данном случае, метод itemconfig используется для изменения текста элемента timer_canvas на значение переменной count.
-    canvas.itemconfig(timer_canvas,text="{:02d}:{:02d}".format(count_min, count_sec))
+    canvas.itemconfig(timer_canvas,text=f"{count_min:02d}:{count_sec:02d}")
     if count > 0:
         global timer
         #.after() - это метод объекта Tkinter, который позволяет запланировать выполнение функции через определенное количество миллисекунд. Первый аргумент - время задержки в миллисекундах, второй аргумент - функция, которую нужно выполнить после задержки.
